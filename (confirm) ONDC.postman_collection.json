@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "ef8cd67f-f4de-4d09-9c5c-744b660b9b19",
+		"name": "ONDC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24936455"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Lookup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"BG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{registry_url}}/lookup"
+					},
+					"response": []
+				},
+				{
+					"name": "Lookup Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"GATEWAY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{registry_url}}/lookup"
+					},
+					"response": []
+				},
+				{
+					"name": "on_search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BuyerApp",
+			"item": [
+				{
+					"name": "Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponseData = JSON.parse(responseBody);",
+									"var message_id = jsonResponseData.message_id",
+									"pm.collectionVariables.set(\"message_id\",message_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"intent\": {\n        \"fulfillment\": {\n            \"start\": {\n                \"location\": {\n                    \"gps\": \"12.9348455,77.6109492\"\n                }                    \n            },\n            \"end\": {\n                \"location\": {\n                    \"gps\": \"13.0110582,77.55506439999999\"\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2010/search"
+					},
+					"response": []
+				},
+				{
+					"name": "searchWithMessageId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2010/search?message_id=bfae0b56-8020-4594-8745-1a46e3516582\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2010",
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "message_id",
+									"value": "bfae0b56-8020-4594-8745-1a46e3516582\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponseData = JSON.parse(responseBody);",
+									"var message_id = jsonResponseData.message_id",
+									"pm.collectionVariables.set(\"message_id\",message_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"context\": {\n        \"domain\": \"nic2004:60221\",\n        \"country\": \"IND\",\n        \"city\": \"std:080\",\n        \"action\": \"search\",\n        \"core_version\": \"1.0.0\",\n        \"bap_id\": \"sample_mobility_bap\",\n        \"bap_uri\": \"http://localhost:2010\",\n        \"transaction_id\": \"943191de-42a3-4821-9c52-bef1d62e9bf4\",\n        \"message_id\": \"6fa9326d-1ae1-4c71-aeb2-c06a2b6875ce\",\n        \"timestamp\": \"2022-12-08T11:06:52+05:30\",\n        \"bpp_id\": \"sample_mobility_bpp\",\n        \"bpp_uri\": \"http://localhost:3010\"\n    },\n    \"message\": {\n        \"order\": {\n            \"items\": [\n                {\n                    \"id\": \"FAKE_TAXI_ID\",\n                    \"fulfillment_id\": \"FAKE_TAXI_FULFILLMENT_ID\",\n                    \"descriptor\": {\n                        \"name\": \"Premium Taxi\",\n                        \"code\": \"Premium Taxi\",\n                        \"images\": [\n                            \"https://cdn.iconscout.com/icon/premium/png-256-thumb/searching-car-automobile-3052095-2538547.png\"\n                        ]\n                    },\n                    \"price\": {\n                        \"currency\": \"INR\",\n                        \"value\": \"111\"\n                    },\n                    \"category_id\": \"FAKE_TAXI_CATEGORY_ID\",\n                    \"tags\": {\n                        \"NameOfModel\": \"Nexon\",\n                        \"Make\": \"Tata\",\n                        \"FuelType\": \"Petrol\",\n                        \"VehicleType\": \"Premium Taxi\"\n                    }\n                }\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2010/select"
+					},
+					"response": []
+				},
+				{
+					"name": "selectWithMessageId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl_buyer}}/select?message_id=f0973277-5873-4b2c-b438-be840708d386",
+							"host": [
+								"{{baseUrl_buyer}}"
+							],
+							"path": [
+								"select"
+							],
+							"query": [
+								{
+									"key": "message_id",
+									"value": "f0973277-5873-4b2c-b438-be840708d386"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Init",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponseData = JSON.parse(responseBody);",
+									"var message_id = jsonResponseData.message_id",
+									"pm.collectionVariables.set(\"message_id\",message_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"context\": {\n        \"domain\": \"nic2004:60221\",\n        \"country\": \"IND\",\n        \"city\": \"std:080\",\n        \"action\": \"search\",\n        \"core_version\": \"1.0.0\",\n        \"bap_id\": \"sample_mobility_bap\",\n        \"bap_uri\": \"http://localhost:2010\",\n        \"transaction_id\": \"943191de-42a3-4821-9c52-bef1d62e9bf4\",\n        \"message_id\": \"6fa9326d-1ae1-4c71-aeb2-c06a2b6875ce\",\n        \"timestamp\": \"2022-12-08T11:06:52+05:30\",\n        \"bpp_id\": \"sample_mobility_bpp\",\n        \"bpp_uri\": \"http://localhost:3010\"\n    },\n    \"message\": {\n        \"order\": {\n            \"items\": [\n                {\n                    \"id\": \"FAKE_TAXI_ID\",\n                    \"fulfillment_id\": \"FAKE_TAXI_FULFILLMENT_ID\",\n                    \"descriptor\": {\n                        \"name\": \"Premium Taxi\",\n                        \"code\": \"Premium Taxi\",\n                        \"images\": [\n                            \"https://cdn.iconscout.com/icon/premium/png-256-thumb/searching-car-automobile-3052095-2538547.png\"\n                        ]\n                    },\n                    \"price\": {\n                        \"currency\": \"INR\",\n                        \"value\": \"111\"\n                    },\n                    \"category_id\": \"FAKE_TAXI_CATEGORY_ID\",\n                    \"tags\": {\n                        \"NameOfModel\": \"Nexon\",\n                        \"Make\": \"Tata\",\n                        \"FuelType\": \"Petrol\",\n                        \"VehicleType\": \"Premium Taxi\"\n                    }\n                }\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2010/init"
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponseData = JSON.parse(responseBody);",
+									"var message_id = jsonResponseData.message_id",
+									"pm.collectionVariables.set(\"message_id\",message_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"context\": {\n        \"action\": \"select\",\n        \"transaction_id\": \"6973ef5b-7ee8-48ca-9d7b-9d53dc8e1cce\",\n        \"bpp_uri\": \"http://localhost:3010\"\n    },\n    \"message\": {\n        \"order\": {\n            \"provider\": {\n                \"id\": \"111-222-300\"\n            },\n            \"items\": [\n                {\n                    \"id\": \"Bake_SUV_ID\",\n                    \"fulfillment_id\": \"Bake_SUV_FULFILLMENT_ID\",\n                    \"descriptor\": {\n                        \"name\": \"SUV\",\n                        \"code\": \"SUV_TAXI\",\n                        \"images\": [\n                            \"https://cdn.iconscout.com/icon/premium/png-256-thumb/taxi-2716987-2254385.png\"\n                        ]\n                    },\n                    \"price\": {\n                        \"currency\": \"INR\",\n                        \"value\": \"141\"\n                    },\n                    \"category_id\": \"Bake_TAXI_SUV\"\n                }\n            ],\n            \"fulfillment\": {\n                \"tracking\": false,\n                \"start\": {\n                    \"location\": {\n                        \"gps\": \"12.934845,77.610949\"\n                    }\n                },\n                \"end\": {\n                    \"location\": {\n                        \"gps\": \"13.011058,77.555064\"\n                    }\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:2010/confirm"
+					},
+					"response": []
+				},
+				{
+					"name": "initWithMessageId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl_buyer}}/select?message_id=2998b0f0-1e42-4916-a801-62dffc6a7f5d",
+							"host": [
+								"{{baseUrl_buyer}}"
+							],
+							"path": [
+								"select"
+							],
+							"query": [
+								{
+									"key": "message_id",
+									"value": "2998b0f0-1e42-4916-a801-62dffc6a7f5d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ConfirmWithMessageId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2010/confirm?message_id=e8ca9efd-8ee5-4515-abb5-2be620497153",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2010",
+							"path": [
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "message_id",
+									"value": "e8ca9efd-8ee5-4515-abb5-2be620497153"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SellerApp",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"context\": {\n        \"domain\": \"nic2004:60221\",\n        \"country\": \"IND\",\n        \"city\": \"std:080\",\n        \"action\": \"search\",\n        \"core_version\": \"1.0.0\",\n        \"bap_id\": \"sample_mobility_bap\",\n        \"bap_uri\": \"http://localhost:2010\",\n        \"transaction_id\": \"e62d49eb-4c47-4b30-97bf-23f862780021\",\n        \"message_id\": \"17f80b8c-6996-4d0a-9027-b61c06e26e62\",\n        \"timestamp\": \"2022-12-05T08:44:47.005092Z\"\n    },\n    \"message\": {\n        \"intent\": {\n            \"fulfillment\": {\n                \"start\": {\n                    \"location\": {\n                        \"gps\": \"12.9348455,77.6109492\"\n                    }                    \n                },\n                \"end\": {\n                    \"location\": {\n                        \"gps\": \"13.0110582,77.55506439999999\"\n                    }    \n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3010/search"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registry",
+			"item": [
+				{
+					"name": "KOMN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"BPP\",\n    \"country\":\"IND\",\n    \"city\":\"Kochi\",\n    \"unique_key_id\":\"25\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://pilot-gateway-1.beckn.nsdl.co.in/lookup"
+					},
+					"response": []
+				},
+				{
+					"name": "ONDC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country\":\"IND\",\n    \"city\":\"std:080\",\n    \"type\":\"BAP\",\n    \"ukId\":\"09740d79-a271-4ead-a9d0-4ed7a5ae9a32\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://preprod.registry.ondc.org/ondc/lookup"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "message_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
