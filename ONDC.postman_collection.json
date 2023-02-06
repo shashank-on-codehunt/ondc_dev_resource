@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "ef8cd67f-f4de-4d09-9c5c-744b660b9b19",
 		"name": "ONDC",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "24936455"
 	},
 	"item": [
@@ -23,15 +23,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{registry_url}}/lookup",
-							"host": [
-								"{{registry_url}}"
-							],
-							"path": [
-								"lookup"
-							]
-						}
+						"url": "{{registry_url}}/lookup"
 					},
 					"response": []
 				},
@@ -49,17 +41,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:1010/lookup",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "1010",
-							"path": [
-								"lookup"
-							]
-						}
+						"url": "http://localhost:1010/lookup"
 					},
 					"response": []
 				},
@@ -68,9 +50,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": ""
-						}
+						"url": ""
 					},
 					"response": []
 				}
@@ -106,17 +86,38 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/search",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"search"
-							]
+						"url": "http://localhost:2010/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponseData = JSON.parse(responseBody);",
+									"var message_id = jsonResponseData.message_id",
+									"pm.collectionVariables.set(\"message_id\",message_id);"
+								],
+								"type": "text/javascript"
+							}
 						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3010/subscribe"
 					},
 					"response": []
 				},
@@ -126,7 +127,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2010/search?message_id=8cf9646a-a454-42d9-81e6-db226a33016f",
+							"raw": "http://localhost:2010/search?message_id=a33d9081-235f-4856-ab66-66ad64d106fc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -138,7 +139,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "8cf9646a-a454-42d9-81e6-db226a33016f"
+									"value": "a33d9081-235f-4856-ab66-66ad64d106fc"
 								}
 							]
 						}
@@ -172,17 +173,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/select",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"select"
-							]
-						}
+						"url": "http://localhost:2010/select"
 					},
 					"response": []
 				},
@@ -192,7 +183,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2010/select?message_id=e9655297-8e80-45f6-9425-6da0dc6066ac",
+							"raw": "http://localhost:2010/select?message_id=14f1f417-af4b-458b-9f83-45c788dcbcf2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -204,7 +195,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "e9655297-8e80-45f6-9425-6da0dc6066ac"
+									"value": "14f1f417-af4b-458b-9f83-45c788dcbcf2"
 								}
 							]
 						}
@@ -238,17 +229,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/init",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"init"
-							]
-						}
+						"url": "http://localhost:2010/init"
 					},
 					"response": []
 				},
@@ -258,7 +239,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:2010/init?message_id=1d704058-972d-4dd3-ab3a-828b5da46b21",
+							"raw": "localhost:2010/init?message_id=f255f814-356a-4263-b913-1f7c1b8033e9",
 							"host": [
 								"localhost"
 							],
@@ -269,7 +250,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "1d704058-972d-4dd3-ab3a-828b5da46b21"
+									"value": "f255f814-356a-4263-b913-1f7c1b8033e9"
 								}
 							]
 						}
@@ -303,17 +284,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/confirm",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"confirm"
-							]
-						}
+						"url": "http://localhost:2010/confirm"
 					},
 					"response": []
 				},
@@ -323,7 +294,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2010/confirm?message_id=eb2fb91f-48a3-44b9-91f4-477d55bafcdb",
+							"raw": "http://localhost:2010/confirm?message_id=74d13554-ab98-40d8-bc6d-f21a228364ad",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -335,7 +306,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "eb2fb91f-48a3-44b9-91f4-477d55bafcdb"
+									"value": "74d13554-ab98-40d8-bc6d-f21a228364ad"
 								}
 							]
 						}
@@ -369,17 +340,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/status",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"status"
-							]
-						}
+						"url": "http://localhost:2010/status"
 					},
 					"response": []
 				},
@@ -389,7 +350,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2010/status?message_id=17ea6e9f-17bf-4833-a963-8a3d7ac7d70c",
+							"raw": "http://localhost:2010/status?message_id=0a6647a2-d039-4e5e-8cec-5c0574ed4e3d",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -401,7 +362,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "17ea6e9f-17bf-4833-a963-8a3d7ac7d70c"
+									"value": "0a6647a2-d039-4e5e-8cec-5c0574ed4e3d"
 								}
 							]
 						}
@@ -435,17 +396,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:2010/track",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2010",
-							"path": [
-								"track"
-							]
-						}
+						"url": "http://localhost:2010/track"
 					},
 					"response": []
 				},
@@ -455,7 +406,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2010/track?message_id=1f383549-e6d8-4959-8542-382be4b6ac7d",
+							"raw": "http://localhost:2010/track?message_id=27658c5b-7dc5-45c0-a049-892f40174858",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -467,7 +418,7 @@
 							"query": [
 								{
 									"key": "message_id",
-									"value": "1f383549-e6d8-4959-8542-382be4b6ac7d"
+									"value": "27658c5b-7dc5-45c0-a049-892f40174858"
 								}
 							]
 						}
@@ -493,16 +444,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3010/search",
-							"host": [
-								"localhost"
-							],
-							"port": "3010",
-							"path": [
-								"search"
-							]
-						}
+						"url": "localhost:3010/search"
 					},
 					"response": []
 				}
@@ -525,20 +467,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "https://pilot-gateway-1.beckn.nsdl.co.in/lookup",
-							"protocol": "https",
-							"host": [
-								"pilot-gateway-1",
-								"beckn",
-								"nsdl",
-								"co",
-								"in"
-							],
-							"path": [
-								"lookup"
-							]
-						}
+						"url": "https://pilot-gateway-1.beckn.nsdl.co.in/lookup"
 					},
 					"response": []
 				},
@@ -556,20 +485,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "https://preprod.registry.ondc.org/ondc/lookup",
-							"protocol": "https",
-							"host": [
-								"preprod",
-								"registry",
-								"ondc",
-								"org"
-							],
-							"path": [
-								"ondc",
-								"lookup"
-							]
-						}
+						"url": "https://preprod.registry.ondc.org/ondc/lookup"
 					},
 					"response": []
 				}
